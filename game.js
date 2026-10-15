@@ -477,7 +477,7 @@
   function clearPreview() {
     prevMarks.forEach(i => {
       const d = cells[i];
-      d.classList.remove('ghost', 'hintcell', 'blast', 'blast-core');
+      d.classList.remove('ghostcell', 'hintcell', 'blast', 'blast-core');
       if (!d.classList.contains('f')) d.style.removeProperty('--c');
     });
     prevMarks = [];
@@ -488,7 +488,7 @@
     clearPreview();
     if (!t) return;
     const [r, c] = t;
-    p.offs.forEach(o => { const d = cells[r * N + c + o]; d.style.setProperty('--c', 'var(--b' + p.color + ')'); d.classList.add(cls || 'ghost'); prevMarks.push(r * N + c + o); });
+    p.offs.forEach(o => { const d = cells[r * N + c + o]; d.style.setProperty('--c', 'var(--b' + p.color + ')'); d.classList.add(cls || 'ghostcell'); prevMarks.push(r * N + c + o); });
   }
   function showBlast(t) {
     clearPreview();
