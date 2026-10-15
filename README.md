@@ -14,7 +14,7 @@ A block puzzle in plain HTML, CSS and JavaScript. It is a single page app: no bu
 | `favicon.svg` | Tab icon |
 | `manifest.webmanifest` | Web app manifest (name, colours, icons) |
 | `sw.js` | Service worker: offline play and install support |
-| `icons/` | App icons (192, 512, maskable, Apple touch) |
+| `icons/` | App icons (192, 512, maskable, Apple touch) and `og-image.png` for link previews |
 | `_redirects` | SPA fallback for Cloudflare Pages and Netlify |
 | `404.html` | SPA fallback for GitHub Pages and other static hosts |
 | `.nojekyll` | Stops GitHub Pages from dropping files that start with `_` |
@@ -58,6 +58,12 @@ To update later, open the project, choose Create deployment, and upload the file
 
 - **Netlify** works as is: it reads the same `_redirects` file.
 - **GitHub Pages** works as is: `.nojekyll` keeps underscore files, and `404.html` covers unknown routes. Publish the branch root.
+
+## Link previews (sharing)
+
+When the link is shared, the preview title, description and image come from the Open Graph and X/Twitter tags in `index.html`, using `icons/og-image.png` (1200x630).
+
+Social networks do not resolve relative paths, so `og:url` and `og:image` are hardcoded to the live address, `https://satisfy-blast.az-tech.my.id/`. If the site moves to another domain, update those tags: search `index.html` for `az-tech.my.id` and replace every occurrence with the new address. After deploying, use each platform's debugger (Facebook Sharing Debugger, LinkedIn Post Inspector, X Card Validator) to refresh a cached preview.
 
 ## High score
 

@@ -30,6 +30,50 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="canonical" href="https://satisfy-blast.az-tech.my.id/" />
+
+    <!-- Link previews: Open Graph (Facebook, LinkedIn, WhatsApp, Discord, Telegram, Slack, iMessage, ...) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Satisfy Blast" />
+    <meta property="og:title" content="Satisfy Blast" />
+    <meta
+      property="og:description"
+      content="Satisfy Blast: a block puzzle that deals pieces to fit your board. Line up blocks, chain combos and clear the board."
+    />
+    <meta property="og:url" content="https://satisfy-blast.az-tech.my.id/" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:image"
+      content="https://satisfy-blast.az-tech.my.id/icons/og-image.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://satisfy-blast.az-tech.my.id/icons/og-image.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Satisfy Blast, a colourful block puzzle game."
+    />
+
+    <!-- Link previews: X / Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Satisfy Blast" />
+    <meta
+      name="twitter:description"
+      content="Satisfy Blast: a block puzzle that deals pieces to fit your board. Line up blocks, chain combos and clear the board."
+    />
+    <meta
+      name="twitter:image"
+      content="https://satisfy-blast.az-tech.my.id/icons/og-image.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Satisfy Blast, a colourful block puzzle game."
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -245,9 +289,11 @@
     <script src="game.js"></script>
     <script>
       // Install the service worker so Satisfy Blast works offline and installs as an app.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-          navigator.serviceWorker.register('sw.js').catch(function () { /* offline support is optional */ });
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("sw.js").catch(function () {
+            /* offline support is optional */
+          });
         });
       }
     </script>
