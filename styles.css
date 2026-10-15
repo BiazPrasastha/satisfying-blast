@@ -68,11 +68,11 @@ body {
   /* Height budget. The board is square and the tray under it is 2.7 cells tall.
      With cell = (board - 37px) / 8, the tray is 0.3375 * board - 12.5px, so
      board + tray = 1.3375 * board - 12.5px. The rest of the column (header,
-     score, controls, the four gaps and the page padding) measures about 221px,
-     so the board fits when board <= (100dvh - 208.5px) / 1.3375. A few extra
-     pixels of slack are kept below. This lets short phones use their full
-     height instead of leaving a gap under the controls. */
-  --board: max(240px, min(100vw - 24px, 480px, (100dvh - 218px) / 1.3375));
+     score, controls, footer, the five gaps and the page padding) measures about
+     248px, so the board fits when board <= (100dvh - 236px) / 1.3375. A few
+     extra pixels of slack are kept below. This lets short phones use their full
+     height instead of leaving a gap under the footer. */
+  --board: max(240px, min(100vw - 24px, 480px, (100dvh - 246px) / 1.3375));
   --cell: calc((var(--board) - 2 * var(--pad) - 7 * var(--gap)) / 8);
   width: var(--board);
   display: flex;
@@ -222,6 +222,10 @@ svg.i.caret { width: 12px; height: 12px; stroke-width: 2.6; }
 .bomb.lifted { opacity: 0.45; }
 .bomb.needs { animation: needs 0.9s ease-in-out infinite; }
 @media (max-width: 480px) { .btn .t { display: none; } .btn.wide { padding: 0 13px; } }
+
+.foot { margin: 0; text-align: center; color: var(--muted); font: 500 12px/1.3 var(--body); letter-spacing: 0.01em; }
+.foot .heart { color: #E75C86; }
+.foot .handle { font-weight: 600; }
 
 /* big popups, drawn above everything */
 #fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 25; }
