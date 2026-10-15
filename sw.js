@@ -1,6 +1,6 @@
 /* Satisfy Blast service worker.
    Bump VERSION when the app shell changes so old caches are dropped. */
-const VERSION = 'satisfy-blast-v1';
+const VERSION = 'satisfy-blast-v2';
 
 const SHELL = [
   './',

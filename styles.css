@@ -50,8 +50,8 @@ body {
   min-height: 100%;
   box-sizing: border-box;
   padding-block: 10px 14px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-left: max(12px, env(safe-area-inset-left, 0px));
+  padding-right: max(12px, env(safe-area-inset-right, 0px));
   background: var(--bg);
   color: var(--ink);
   font-family: var(--body);
@@ -65,7 +65,7 @@ body {
 .app {
   --pad: 8px;
   --gap: 3px;
-  --board: max(240px, min(100vw - 32px, 440px, 100dvh - 365px));
+  --board: max(240px, min(100vw - 24px, 480px, 100dvh - 365px));
   --cell: calc((var(--board) - 2 * var(--pad) - 7 * var(--gap)) / 8);
   width: var(--board);
   display: flex;
