@@ -65,7 +65,14 @@ body {
 .app {
   --pad: 8px;
   --gap: 3px;
-  --board: max(240px, min(100vw - 24px, 480px, 100dvh - 365px));
+  /* Height budget. The board is square and the tray under it is 2.7 cells tall.
+     With cell = (board - 37px) / 8, the tray is 0.3375 * board - 12.5px, so
+     board + tray = 1.3375 * board - 12.5px. The rest of the column (header,
+     score, controls, the four gaps and the page padding) measures about 221px,
+     so the board fits when board <= (100dvh - 208.5px) / 1.3375. A few extra
+     pixels of slack are kept below. This lets short phones use their full
+     height instead of leaving a gap under the controls. */
+  --board: max(240px, min(100vw - 24px, 480px, (100dvh - 218px) / 1.3375));
   --cell: calc((var(--board) - 2 * var(--pad) - 7 * var(--gap)) / 8);
   width: var(--board);
   display: flex;
