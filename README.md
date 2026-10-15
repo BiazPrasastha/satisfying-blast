@@ -43,7 +43,16 @@ To update later, open the project, choose Create deployment, and upload the file
 
 1. Push this folder to a repository.
 2. In Pages choose Connect to Git and pick the repository.
-3. Framework preset: None. Build command: leave empty. Build output directory: `/`.
+3. Use these build settings:
+
+   | Setting | Value |
+   | --- | --- |
+   | Production branch | `main` |
+   | Framework preset | `None` |
+   | Build command | `exit 0` |
+   | Build output directory | `/` |
+
+   `exit 0` is Cloudflare's recommended no-op build command (it also keeps Pages Functions available). The output directory is `/` because `index.html` sits at the top level of the repository. Leave the root directory at its default.
 
 ### Other hosts
 
