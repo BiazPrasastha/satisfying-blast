@@ -130,16 +130,12 @@ svg.i.caret { width: 12px; height: 12px; stroke-width: 2.6; }
   box-shadow: inset 0 calc(var(--cell) * -0.09) 0 rgba(0, 0, 0, 0.16), inset 0 calc(var(--cell) * 0.07) 0 rgba(255, 255, 255, 0.32);
 }
 .cell.ghost::after, .cell.hintcell::after {
-  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--c); opacity: 0.5;
 }
-/* While dragging, only the board cells the piece would land on are highlighted (an outline).
-   The piece is not drawn as a filled/glowing ghost, so the floating block is the only block shown. */
-.cell.ghost::after { box-shadow: inset 0 0 0 max(2px, calc(var(--cell) * 0.08)) var(--c, var(--accent)); }
-.cell.hintcell::after { background: var(--c); opacity: 0.5; animation: hintpulse 0.8s ease-in-out infinite alternate; }
+.cell.hintcell::after { animation: hintpulse 0.8s ease-in-out infinite alternate; }
 .cell.blast::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--blast); opacity: 0.32; }
 .cell.f.blast::after { opacity: 0.6; }
 .cell.blast-core::after { opacity: 0.85; }
-.cell.pc-line { animation: linepulse 0.5s ease-in-out infinite alternate; }
 .cell.landed { animation: land 0.26s ease-out; }
 .cell.clearing { animation: clr 0.4s ease-in forwards; animation-delay: calc(var(--d, 0) * 30ms); }
 
@@ -254,7 +250,6 @@ svg.i.caret { width: 12px; height: 12px; stroke-width: 2.6; }
 
 @keyframes bump { 0% { transform: scale(1); } 40% { transform: scale(1.1); } 100% { transform: scale(1); } }
 @keyframes land { 0% { transform: scale(0.82); filter: brightness(1.4); } 100% { transform: scale(1); filter: brightness(1); } }
-@keyframes linepulse { from { filter: brightness(1); } to { filter: brightness(1.22); } }
 @keyframes hintpulse { from { opacity: 0.25; } to { opacity: 0.7; } }
 @keyframes needs { 0%, 100% { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28), 0 0 0 0 rgba(255, 184, 77, 0.8); } 50% { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28), 0 0 0 12px rgba(255, 184, 77, 0); } }
 @keyframes clr {
@@ -286,7 +281,7 @@ svg.i.caret { width: 12px; height: 12px; stroke-width: 2.6; }
 @keyframes shake2 { 0%, 100% { transform: translate(0, 0); } 15% { transform: translate(-7px, 4px); } 30% { transform: translate(6px, -5px); } 45% { transform: translate(-5px, -4px); } 60% { transform: translate(5px, 4px); } 80% { transform: translate(-3px, 2px); } }
 @media (prefers-reduced-motion: reduce) {
   .cell.clearing { animation-duration: 0.15s; animation-delay: 0s; }
-  .slot.deal, .slot.hint .piece, .slot.guide .piece, .cell.pc-line, .cell.hintcell::after, .bomb.needs, .pop .rays, .ring, .flash, .boardwrap.shake1, .boardwrap.shake2 { animation: none; }
+  .slot.deal, .slot.hint .piece, .slot.guide .piece, .cell.hintcell::after, .bomb.needs, .pop .rays, .ring, .flash, .boardwrap.shake1, .boardwrap.shake2 { animation: none; }
   .pop { animation: popfade 1.4s ease-out forwards; }
   .pop .rays, .ring, .flash { display: none; }
   .toast.show { animation-duration: 0.6s; }

@@ -477,20 +477,18 @@
   function clearPreview() {
     prevMarks.forEach(i => {
       const d = cells[i];
-      d.classList.remove('ghost', 'pc-line', 'hintcell', 'blast', 'blast-core');
+      d.classList.remove('ghost', 'hintcell', 'blast', 'blast-core');
       if (!d.classList.contains('f')) d.style.removeProperty('--c');
     });
     prevMarks = [];
   }
+  // Preview only the dragged piece's own cells, so the effect fits the block and never
+  // spills onto the neighbouring blocks in the rows / columns it would clear.
   function showPreview(p, t, cls) {
     clearPreview();
     if (!t) return;
-    const [r, c] = t, res = place(state.board, p, r, c);
+    const [r, c] = t;
     p.offs.forEach(o => { const d = cells[r * N + c + o]; d.style.setProperty('--c', 'var(--b' + p.color + ')'); d.classList.add(cls || 'ghost'); prevMarks.push(r * N + c + o); });
-    if (!cls) {
-      const placed = new Set(p.offs.map(o => r * N + c + o));
-      for (const i of res.cleared) if (!placed.has(i)) { cells[i].classList.add('pc-line'); prevMarks.push(i); }
-    }
   }
   function showBlast(t) {
     clearPreview();
