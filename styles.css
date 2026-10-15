@@ -1,5 +1,11 @@
 
 /* Layout: one calm column. Score on top, a recessed 8x8 tray in the middle, three pieces underneath, hint / bomb / new game last. Settings hide behind a gear. */
+
+/* The [hidden] attribute must always win. Author rules such as `.over { display:flex }`
+   and `.menu { display:flex }` would otherwise override the browser default and leave the
+   game-over overlay and the settings dropdown permanently visible. */
+[hidden] { display: none !important; }
+
 :root {
   --bg: #EEEAF4;
   --tray: #D9D2E7;
