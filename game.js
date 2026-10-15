@@ -1,4 +1,4 @@
-/* RRE Blast: the page logic. Uses engine.js (rules, dealer) and highscore.js (best score). */
+/* Satisfy Blast: the page logic. Uses engine.js (rules, dealer) and highscore.js (best score). */
 (function () {
   'use strict';
   const $ = s => document.querySelector(s);
@@ -7,7 +7,7 @@
   const overEl = $('#over'), fx = $('#fx'), fctx = fx.getContext('2d'), bombBtn = $('#bomb');
   const gear = $('#gear'), menu = $('#menu'), undoBtn = $('#undo');
   const reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const GAME_KEY = 'rre-blast.game.v1', SETTINGS_KEY = 'rre-blast.settings.v1', LEGACY_KEY = 'softlanding.v1';
+  const GAME_KEY = 'satisfy-blast.game.v1', SETTINGS_KEY = 'satisfy-blast.settings.v1';
   const BOMB = { id: 'bomb', w: 1, h: 1, n: 0 };
   const BOMB_SVG = '<svg class="bsvg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="14" r="7.5" fill="#3A3358" stroke="#8F87B3" stroke-width="1.2"/><path d="M7 12.5a4.5 4.5 0 0 1 3-3" fill="none" stroke="#B9B1D9" stroke-width="1.6" stroke-linecap="round"/><path d="M15.8 8.6l2.4-2.4" stroke="#D8B48A" stroke-width="1.8" stroke-linecap="round"/><path d="M19.5 2v3.2M17.9 3.6h3.2M18.4 2.5l2.2 2.2M20.6 2.5l-2.2 2.2" stroke="#FFB84D" stroke-width="1.4" stroke-linecap="round"/></svg>';
   $('#bombIcon').innerHTML = BOMB_SVG;
@@ -273,7 +273,7 @@
     return true;
   }
   function loadSettings() {
-    const s = readJSON(SETTINGS_KEY) || readJSON(LEGACY_KEY) || {};
+    const s = readJSON(SETTINGS_KEY) || {};
     if ([0.9, 0.6, 0.3].includes(s.kind)) state.kind = s.kind;
     if (typeof s.sound === 'boolean') state.sound = s.sound;
     if (typeof s.guided === 'boolean') state.guided = s.guided;
@@ -592,13 +592,10 @@
   window.addEventListener('resize', sizeFx);
 
   /* ---------- start ---------- */
-  function start(data) {
+  function start() {
     loadSettings();
     state.best = HighScore.get();
-    let ok = false;
-    if (data && data.save) ok = restore(data.save);
-    if (!ok) ok = restore(readJSON(GAME_KEY));
-    if (!ok) ok = restore(readJSON(LEGACY_KEY));
+    const ok = restore(readJSON(GAME_KEY));
     sizeFx();
     if (!ok) { newGame(); return; }
     if (state.pieces.every(x => !x) && state.phase === 'play') deal();
@@ -607,8 +604,6 @@
     else if (!anyFits(state.board, state.pieces)) stuck();
     else applyGuide();
   }
-  if (window.__RRE_TEST__) window.__RRE_TEST__.api = { state, history, renderBoard, renderTray, cells };
-  try { window.claude && window.claude.hot && window.claude.hot.snapshot && window.claude.hot.snapshot(() => ({ save: serialize() })); } catch (e) { /* ignore */ }
-  const hot = window.claude && window.claude.hot;
-  if (hot && hot.ready) hot.ready(start); else start((hot && hot.data) || {});
+  if (window.__SATISFY_TEST__) window.__SATISFY_TEST__.api = { state, history, renderBoard, renderTray, cells };
+  start();
 })();

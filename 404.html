@@ -1,0 +1,20 @@
+<!doctype html>
+<!--
+  SPA fallback for static hosts that do not support rewrites (such as GitHub Pages).
+  Any unknown path lands here; send the player back to the app shell.
+  Cloudflare Pages and Netlify use _redirects instead and never reach this file.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Satisfy Blast</title>
+    <script>
+      (function () {
+        var here = document.currentScript && document.currentScript.src;
+        var base = here ? here.replace(/404\.html.*$/, "") : "./";
+        location.replace(base);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

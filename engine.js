@@ -1,4 +1,4 @@
-/* RRE Blast engine: shapes, board rules, bomb, search and the kind piece dealer. No DOM in here. */
+/* Satisfy Blast engine: shapes, board rules, bomb, search and the kind piece dealer. No DOM in here. */
 const N = 8;
 // [family, colour index, weight, picture, rotates]
 const DEFS = [

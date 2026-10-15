@@ -19,16 +19,17 @@
     />
     <meta
       name="description"
-      content="Block Blast - rre version: a block puzzle that deals pieces that fit your board."
+      content="Satisfy Blast: a block puzzle that deals pieces to fit your board. Line up blocks, chain combos and clear the board."
     />
+    <meta name="application-name" content="Satisfy Blast" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-title"
-      content="Block Blast - rre version"
-    />
-    <title>Block Blast - rre version</title>
+    <meta name="apple-mobile-web-app-title" content="Satisfy Blast" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Satisfy Blast</title>
+    <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -47,9 +48,9 @@
     <canvas id="fx"></canvas>
     <div class="layer" id="layer" aria-hidden="true"></div>
 
-    <div class="app" id="app">
+    <main class="app" id="app">
       <header class="top">
-        <h1>Block Blast - rre version</h1>
+        <h1>Satisfy Blast</h1>
         <div class="tools">
           <button
             class="icon"
@@ -231,10 +232,18 @@
           <span class="t" id="restartT">New game</span>
         </button>
       </div>
-    </div>
+    </main>
 
     <script src="engine.js"></script>
     <script src="highscore.js"></script>
     <script src="game.js"></script>
+    <script>
+      // Install the service worker so Satisfy Blast works offline and installs as an app.
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('sw.js').catch(function () { /* offline support is optional */ });
+        });
+      }
+    </script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-/* RRE Blast high score.
+/* Satisfy Blast high score.
 
    The best score lives in its own localStorage entry, apart from the saved game and the settings.
    That keeps it safe when the game changes between deploys, when a new game starts, or when a
@@ -7,8 +7,7 @@
    To carry a score across a deploy (for example to set a number to beat), raise SEED below.
    The best score shown is never lower than SEED. */
 const HighScore = (function () {
-  const KEY = 'rre-blast.highscore.v1';
-  const LEGACY_KEYS = ['softlanding.v1']; // earlier build of this game, read once
+  const KEY = 'satisfy-blast.highscore.v1';
   const SEED = 0;
 
   let cache = null;
@@ -26,14 +25,7 @@ const HighScore = (function () {
   function load() {
     if (cache !== null) return cache;
     const own = readJSON(KEY);
-    let best = own ? clean(own.best) : 0;
-    if (!own) {
-      for (const k of LEGACY_KEYS) {
-        const old = readJSON(k);
-        if (old) best = Math.max(best, clean(old.best));
-      }
-      if (best > 0) write(best);
-    }
+    const best = own ? clean(own.best) : 0;
     cache = Math.max(best, clean(SEED));
     return cache;
   }

@@ -1,0 +1,3 @@
+# Satisfy Blast is a single page app: serve the app shell for every route.
+# Works on Cloudflare Pages and Netlify (same file format).
+/*    /index.html   200
