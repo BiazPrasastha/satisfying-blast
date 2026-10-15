@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      content="#EEEAF4"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#19162A"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="description"
+      content="Block Blast - rre version: a block puzzle that deals pieces that fit your board."
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="Block Blast - rre version"
+    />
+    <title>Block Blast - rre version</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600&family=Rubik:wght@500;600;700&display=swap"
+    />
+    <style>
+      :root {
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+    </style>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="fx"></canvas>
+    <div class="layer" id="layer" aria-hidden="true"></div>
+
+    <div class="app" id="app">
+      <header class="top">
+        <h1>Block Blast - rre version</h1>
+        <div class="tools">
+          <button
+            class="icon"
+            id="sound"
+            type="button"
+            aria-label="Sound on"
+            aria-pressed="true"
+          >
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9v6h4l5 4V5L8 9H4z" />
+              <g id="waves">
+                <path d="M16.5 8.5a5 5 0 0 1 0 7" />
+                <path d="M19 6a8.5 8.5 0 0 1 0 12" />
+              </g>
+              <path id="mute" d="M17 9l5 6M22 9l-5 6" hidden />
+            </svg>
+          </button>
+          <button
+            class="icon gear"
+            id="gear"
+            type="button"
+            aria-label="Settings"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="menu"
+          >
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+              />
+            </svg>
+            <svg class="i caret" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+        </div>
+        <div class="menu" id="menu" hidden>
+          <div>
+            <span class="lbl" id="kLbl">Kindness</span>
+            <div
+              class="opts"
+              role="radiogroup"
+              aria-labelledby="kLbl"
+              id="kind"
+            >
+              <button
+                type="button"
+                role="radio"
+                data-k="0.9"
+                aria-checked="true"
+              >
+                90%
+              </button>
+              <button
+                type="button"
+                role="radio"
+                data-k="0.6"
+                aria-checked="false"
+              >
+                60%
+              </button>
+              <button
+                type="button"
+                role="radio"
+                data-k="0.3"
+                aria-checked="false"
+              >
+                30%
+              </button>
+            </div>
+            <p style="margin-top: 8px">
+              How often the next three pieces are picked to fit the board. The
+              rest are random.
+            </p>
+          </div>
+          <hr />
+          <div class="row">
+            <div>
+              <span class="lbl" id="gLbl">Guided</span>
+              <p>Shows which piece goes where, on every turn.</p>
+            </div>
+            <button
+              class="switch"
+              id="guided"
+              type="button"
+              role="switch"
+              aria-checked="false"
+              aria-labelledby="gLbl"
+            ></button>
+          </div>
+        </div>
+      </header>
+
+      <section class="scorebar" aria-live="polite">
+        <div>
+          <span class="lbl">Score</span><span class="num" id="score">0</span>
+        </div>
+        <div class="combo" id="combo"></div>
+        <div class="best">
+          <span class="lbl">Best</span><span class="num sm" id="best">0</span>
+        </div>
+      </section>
+
+      <div class="boardwrap" id="bw">
+        <div
+          class="board"
+          id="board"
+          role="img"
+          aria-label="Game board, 8 by 8"
+        ></div>
+        <div class="toast" id="toast"></div>
+        <div class="over" id="over" hidden>
+          <h2 id="overTitle">No room left</h2>
+          <div class="big" id="overScore">0</div>
+          <p id="overNote"></p>
+          <div class="actions">
+            <button class="primary" id="useBomb" type="button">
+              <span id="useBombIcon"></span>Use a bomb
+            </button>
+            <button class="ghost" id="giveUp" type="button">Give up</button>
+            <button class="primary" id="again" type="button" hidden>
+              Play again
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tray" id="tray"></div>
+
+      <div class="controls">
+        <div class="grp">
+          <button
+            class="btn icononly"
+            id="undo"
+            type="button"
+            aria-label="Undo last move"
+            title="Undo"
+            disabled
+          >
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 14L4 9l5-5" />
+              <path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" />
+            </svg>
+          </button>
+          <button
+            class="btn icononly"
+            id="hint"
+            type="button"
+            aria-label="Show a hint"
+            title="Hint"
+          >
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"
+              />
+            </svg>
+          </button>
+        </div>
+        <button
+          class="bomb"
+          id="bomb"
+          type="button"
+          aria-label="Bomb, unlimited. Drag it onto the board"
+        >
+          <span class="bi" id="bombIcon"></span><span>Bomb</span
+          ><span class="inf" aria-hidden="true">&infin;</span>
+        </button>
+        <button
+          class="btn wide"
+          id="restart"
+          type="button"
+          aria-label="Start a new game"
+        >
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 12a8 8 0 1 1-2.6-5.9" />
+            <path d="M20 4v5h-5" />
+          </svg>
+          <span class="t" id="restartT">New game</span>
+        </button>
+      </div>
+    </div>
+
+    <script src="engine.js"></script>
+    <script src="highscore.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>

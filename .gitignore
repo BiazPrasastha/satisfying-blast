@@ -1,0 +1,6 @@
+# Windows alternate data stream artifacts created when files are downloaded
+*:Zone.Identifier
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
